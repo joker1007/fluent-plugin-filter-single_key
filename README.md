@@ -1,8 +1,6 @@
 # fluent-plugin-filter-single_key
 
-[Fluentd](https://fluentd.org/) filter plugin to do something.
-
-TODO: write description for you plugin.
+[Fluentd](https://fluentd.org/) filter plugin that Explode record to single key record.
 
 ## Installation
 
@@ -28,11 +26,17 @@ $ bundle
 
 ## Configuration
 
-You can generate configuration template:
+### key_pattern (string) (required)
 
-```
-$ fluent-plugin-config-format filter filter-single_key
-```
+regexp pattern for target key
+
+### keep_key_pattern (string) (optional)
+
+regexp pattern for keep key
+
+### new_key (string) (optional)
+
+If this param is set, replace this value as new key
 
 You can copy and paste generated documents here.
 

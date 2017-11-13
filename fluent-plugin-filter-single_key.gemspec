@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Fluentd filter plugin that Explode record to single key record.}
   spec.description   = %q{Fluentd filter plugin that Explode record to single key record.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/joker1007/fluent-plugin-filter-single_key"
   spec.license       = "MIT"
 
   test_files, files  = `git ls-files -z`.split("\x0").partition do |f|
