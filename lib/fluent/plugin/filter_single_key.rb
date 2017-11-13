@@ -35,7 +35,7 @@ module Fluent
                   end
 
                 if @keep_key_pattern
-                  keep_record = record.select { |k2, _| k2.match?(@keep_key_pattern) }
+                  keep_record = record.select { |k2, _| k2 =~ @keep_key_pattern }
                   unless keep_record.empty?
                     new_record = keep_record.merge(new_record)
                   end
