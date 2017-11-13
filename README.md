@@ -40,6 +40,32 @@ If this param is set, replace this value as new key
 
 You can copy and paste generated documents here.
 
+## Sample
+
+### Config
+
+```
+<filter sample.tag>
+  key_pattern foo(\d)
+  new_key bar\1
+  keep_key_pattern other1
+</filter>
+```
+
+### Incoming Record
+
+```
+{"foo1" => 1, "foo2" => 2, "other1" => 99, "other2" => 100}
+```
+
+### Outgoing Record
+
+```
+{"bar1" => 1, "other1" => 99}
+{"bar2" => 2, "other1" => 99}
+{"bar3" => 3, "other1" => 99}
+```
+
 ## Copyright
 
 * Copyright(c) 2017- joker1007
