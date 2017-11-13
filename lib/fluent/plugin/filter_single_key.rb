@@ -8,6 +8,9 @@ module Fluent
       desc "regexp pattern for target key"
       config_param :key_pattern, :string
 
+      desc "regexp pattern for keep key"
+      config_param :keep_key_pattern, :string, default: nil
+
       desc "If this param is set, replace this value as new key"
       config_param :new_key, :string, default: nil
 
@@ -15,6 +18,7 @@ module Fluent
         super
 
         @key_pattern = Regexp.new(@key_pattern)
+        @keep_key_pattern = Regexp.new(@keep_key_pattern) if @keep_key_pattern
       end
 
       def filter_stream(tag, es)
@@ -29,6 +33,13 @@ module Fluent
                   else
                     {k => v}
                   end
+
+                if @keep_key_pattern
+                  keep_record = record.select { |k2, _| k2.match?(@keep_key_pattern) }
+                  unless keep_record.empty?
+                    new_record = keep_record.merge(new_record)
+                  end
+                end
                 new_es.add(time, new_record)
               end
             end

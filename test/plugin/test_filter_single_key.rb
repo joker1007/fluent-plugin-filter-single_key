@@ -35,6 +35,19 @@ class SingleValueFilterTest < Test::Unit::TestCase
     assert { d.filtered_records == [{"foo1" => 1}, {"foo2" => 2}] }
   end
 
+  test "#filter_stream wit keep_key_pattern" do
+    d = create_driver(%q{
+      key_pattern foo(\d)
+      keep_key_pattern no_match
+    })
+
+    d.run do
+      d.feed("tag", Time.now.to_i, {"foo1" => 1, "foo2" => 2, "no_match" => 99})
+    end
+
+    assert { d.filtered_records == [{"foo1" => 1, "no_match" => 99}, {"foo2" => 2, "no_match" => 99}] }
+  end
+
   private
 
   DEFAULT_CONF = %q{
