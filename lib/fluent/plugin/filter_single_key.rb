@@ -22,7 +22,7 @@ module Fluent
       end
 
       def filter_stream(tag, es)
-        new_es = MultiEventStream.new
+        new_es = Fluent::MultiEventStream.new
         es.each do |time, record|
           begin
             record.each do |k, v|
