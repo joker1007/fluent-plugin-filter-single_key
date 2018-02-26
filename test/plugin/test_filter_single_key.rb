@@ -17,7 +17,7 @@ class SingleValueFilterTest < Test::Unit::TestCase
     d = create_driver
 
     d.run do
-      d.feed("tag", Time.now.to_i, {"foo1" => 1, "foo2" => 2, "no_match" => 99})
+      d.feed("tag", event_time, {"foo1" => 1, "foo2" => 2, "no_match" => 99})
     end
 
     assert { d.filtered_records == [{"bar1" => 1}, {"bar2" => 2}] }
@@ -29,7 +29,7 @@ class SingleValueFilterTest < Test::Unit::TestCase
     })
 
     d.run do
-      d.feed("tag", Time.now.to_i, {"foo1" => 1, "foo2" => 2, "no_match" => 99})
+      d.feed("tag", event_time, {"foo1" => 1, "foo2" => 2, "no_match" => 99})
     end
 
     assert { d.filtered_records == [{"foo1" => 1}, {"foo2" => 2}] }
@@ -42,7 +42,7 @@ class SingleValueFilterTest < Test::Unit::TestCase
     })
 
     d.run do
-      d.feed("tag", Time.now.to_i, {"foo1" => 1, "foo2" => 2, "no_match" => 99})
+      d.feed("tag", event_time, {"foo1" => 1, "foo2" => 2, "no_match" => 99})
     end
 
     assert { d.filtered_records == [{"foo1" => 1, "no_match" => 99}, {"foo2" => 2, "no_match" => 99}] }
